@@ -22,7 +22,7 @@ TASK1:
   loss: CrossEntropyLoss
   task_id: 6
   dataroot: data/VCR
-  features_h5path1: data/VCR/VCR_gt_resnet101_faster_rcnn_genome.lmdb
+  features_h5path1: data/VCR/VCR_resnet101_faster_rcnn_genome.lmdb
   features_h5path2: data/VCR/VCR_gt_resnet101_faster_rcnn_genome.lmdb
   train_annotations_jsonpath: data/VCR/train.jsonl
   val_annotations_jsonpath: data/VCR/val.jsonl
