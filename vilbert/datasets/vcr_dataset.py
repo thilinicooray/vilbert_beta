@@ -43,6 +43,7 @@ def _load_annotationsQ_A(annotations_jsonpath, split):
             det_names = ""
             question = annotation["question"]
             if split == 'test':
+                print('came hereee')
                 ans_label = 0
             else:
                 ans_label = annotation["answer_label"]
@@ -105,6 +106,9 @@ class VCRDataset(Dataset):
             self._entries = _load_annotationsQA_R(annotations_jsonpath, split)
         else:
             assert False
+
+        print('len entries  :', len(self._entries))
+
         self._split = split
         self._image_features_reader = image_features_reader
         self._gt_image_features_reader = gt_image_features_reader
