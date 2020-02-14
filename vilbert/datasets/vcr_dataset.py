@@ -43,7 +43,6 @@ def _load_annotationsQ_A(annotations_jsonpath, split):
             det_names = ""
             question = annotation["question"]
             if split == 'test':
-                print('came hereee')
                 ans_label = 0
             else:
                 ans_label = annotation["answer_label"]
