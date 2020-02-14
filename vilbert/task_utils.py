@@ -320,11 +320,10 @@ def LoadDatasetEval(args, task_cfg, ids):
             shuffle=False,
             batch_size=batch_size,
             num_workers=num_workers,
-            pin_memory=False,
+            pin_memory=True,
         )
 
         task_num_iters[task] = len(task_dataloader_val[task])
-        print('iter size :', task_num_iters[task], len(task_datasets_val[task]))
         task_batch_size[task] = batch_size
 
     return task_batch_size, task_num_iters, task_ids, task_datasets_val, task_dataloader_val

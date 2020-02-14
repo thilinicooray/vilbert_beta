@@ -111,6 +111,10 @@ def main():
         "--split", default="", type=str, help="which split to use."
     )
 
+    '''
+    Thil : for test split, change yml file's eval split and ann file. if cache file is outdated, erase and rerun
+    '''
+
     args = parser.parse_args()
     with open('vlbert_tasks.yml', 'r') as f:
         task_cfg = edict(yaml.safe_load(f))

@@ -106,8 +106,6 @@ class VCRDataset(Dataset):
         else:
             assert False
 
-        print('len entries  :', len(self._entries))
-
         self._split = split
         self._image_features_reader = image_features_reader
         self._gt_image_features_reader = gt_image_features_reader
