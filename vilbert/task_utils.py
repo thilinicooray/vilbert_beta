@@ -315,8 +315,6 @@ def LoadDatasetEval(args, task_cfg, ids):
                             max_seq_length=task_cfg[task]['max_seq_length'],
                             max_region_num=task_cfg[task]['max_region_num'])
 
-        print('pathhhh :', task_datasets_val[task].annotations_jsonpath)
-        
         task_dataloader_val[task] = DataLoader(
             task_datasets_val[task],
             shuffle=False,
