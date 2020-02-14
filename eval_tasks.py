@@ -140,12 +140,9 @@ def main():
     bert_weight_name = json.load(open("config/" + args.bert_model + "_weight_name.json", "r"))
 
     if args.local_rank == -1 or args.no_cuda:
-        print('Thi : in')
         device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
         n_gpu = torch.cuda.device_count()
-        print('ngpu ', n_gpu)
     else:
-        print('Thi : else')
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
         n_gpu = 1
