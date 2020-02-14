@@ -99,8 +99,6 @@ class VCRDataset(Dataset):
         max_region_num: int = 60
     ):
         # All the keys in `self._entries` would be present in `self._image_features_reader`
-        print('alll ', annotations_jsonpath, split)
-
         if task == 'VCR_Q-A':
             self._entries = _load_annotationsQ_A(annotations_jsonpath, split)
         elif task == "VCR_QA-R":
