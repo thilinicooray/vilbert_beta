@@ -268,6 +268,8 @@ class VCRDataset(Dataset):
                 mask_b.pop()
 
     def __getitem__(self, index):
+
+        print('idx ', index)
         
         entry = self._entries[index]
 

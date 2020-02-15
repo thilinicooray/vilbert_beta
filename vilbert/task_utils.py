@@ -339,6 +339,9 @@ def compute_score_with_logits(logits, labels):
 def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataloader, task_losses, results, others):
     batch = tuple(t.cuda(device=device, non_blocking=True) for t in batch)
     features, spatials, image_mask, question, target, input_mask, segment_ids, co_attention_mask, question_id = batch
+
+    print('qids ', question_id, target)
+
     batch_size = features.size(0)
 
     if task_id in ['TASK0', 'TASK1', 'TASK2']:
@@ -394,9 +397,6 @@ def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataload
         
         probs = torch.softmax(vil_logit, dim=1)
         for i in range(vil_logit.size(0)):
-            if question_id[i].item() == 1000000:
-                print('here')
-
             results.append({'question_id':question_id[i].item(), 'answer':[prob.item() for prob in probs[i]]})
 
     elif task_cfg[task_id]['type'] == 'V-logit':
