@@ -388,7 +388,7 @@ def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataload
         loss = task_losses[task_id](vil_logit, target)
         _, preds = torch.max(vil_logit, 1)
 
-        print('preds ', preds.size())
+        print('preds ', preds.size(), vil_logit.size())
 
         batch_score = (preds == target).sum()
         
