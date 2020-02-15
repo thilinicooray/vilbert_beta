@@ -97,15 +97,11 @@ class tbLogger(object):
         ave_score = 0
         ave_loss = 0
 
-        print('task ids ', self.task_ids)
-
         for task_id in self.task_ids:
             loss = self.task_loss_val[task_id] / float(self.task_step_val[task_id])
             score = self.task_score_val[task_id] / float(self.task_datasize_val[task_id])
             ave_score += score
             ave_loss += loss
-
-            print('task ', task_id, self.task_score_val[task_id], ave_score, float(self.task_datasize_val[task_id]), score)
 
             lossInfo += '[%s]: loss %.3f score %.3f ' %(self.task_id2name[task_id], loss, score * 100.0)
 
