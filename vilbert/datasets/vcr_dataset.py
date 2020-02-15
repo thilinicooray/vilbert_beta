@@ -269,8 +269,6 @@ class VCRDataset(Dataset):
 
     def __getitem__(self, index):
 
-        print('idx ', index)
-        
         entry = self._entries[index]
 
         image_id = entry["img_id"]
@@ -337,7 +335,7 @@ class VCRDataset(Dataset):
                 if idx != -1 and idx+num_box_preserve < self._max_region_num:
                     co_attention_mask[ii, idx+num_box_preserve, jj] = 1
 
-        return features, spatials, image_mask, input_ids, target, input_mask, segment_ids, co_attention_mask, anno_id
+        return features, spatials, image_mask, input_ids, target, input_mask, segment_ids, co_attention_mask, anno_id, entry["anno_id"]
 
     def __len__(self):
         return len(self._entries)

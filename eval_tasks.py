@@ -209,7 +209,7 @@ def main():
         results = []
         others = []
         for i, batch in enumerate(task_dataloader_val[task_id]):
-            loss, score, batch_size, results, others = EvaluatingModel(args, task_cfg, device, \
+            loss, score, batch_size, results, others, predictions = EvaluatingModel(args, task_cfg, device, \
                     task_id, batch, model, task_dataloader_val, task_losses, results, others)
 
             tbLogger.step_val(0, float(loss), float(score), task_id, batch_size, 'val')
@@ -226,6 +226,7 @@ def main():
 
         json.dump(results, open(json_path+ '_result.json', 'w'))
         json.dump(others, open(json_path+ '_others.json', 'w'))
+        json.dump(predictions, open(json_path+ '_predictions.json', 'w'))
 
 if __name__ == "__main__":
 

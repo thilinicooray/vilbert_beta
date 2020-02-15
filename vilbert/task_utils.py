@@ -336,11 +336,9 @@ def compute_score_with_logits(logits, labels):
     scores = one_hots * labels
     return scores
 
-def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataloader, task_losses, results, others):
+def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataloader, task_losses, results, predictions, others):
     batch = tuple(t.cuda(device=device, non_blocking=True) for t in batch)
-    features, spatials, image_mask, question, target, input_mask, segment_ids, co_attention_mask, question_id = batch
-
-    print('qids ', question_id, target)
+    features, spatials, image_mask, question, target, input_mask, segment_ids, co_attention_mask, question_id, ann_id = batch
 
     batch_size = features.size(0)
 
@@ -391,13 +389,12 @@ def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataload
         loss = task_losses[task_id](vil_logit, target)
         _, preds = torch.max(vil_logit, 1)
 
-        #print('preds ', preds.size(), vil_logit.size())
-
         batch_score = (preds == target).sum()
         
         probs = torch.softmax(vil_logit, dim=1)
         for i in range(vil_logit.size(0)):
             results.append({'question_id':question_id[i].item(), 'answer':[prob.item() for prob in probs[i]]})
+            predictions.append({'ann_id':ann_id[i].item(), 'pred': preds[i].item(), 'gt': target[i].item()})
 
     elif task_cfg[task_id]['type'] == 'V-logit':
         loss = task_losses[task_id](vision_logit, target)
@@ -409,4 +406,4 @@ def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataload
         for i in range(select_idx.size(0)):
             results.append({'id':question_id[i].item(), 'target':select_idx[i].item(), 'IOU': select_target[i].item()})
 
-    return float(loss), float(batch_score), batch_size, results, others
+    return float(loss), float(batch_score), batch_size, results, others, predictions
