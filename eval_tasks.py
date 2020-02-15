@@ -208,9 +208,10 @@ def main():
     for task_id in task_ids:
         results = []
         others = []
+        predictions = []
         for i, batch in enumerate(task_dataloader_val[task_id]):
             loss, score, batch_size, results, others, predictions = EvaluatingModel(args, task_cfg, device, \
-                    task_id, batch, model, task_dataloader_val, task_losses, results, others)
+                    task_id, batch, model, task_dataloader_val, task_losses, results, others, predictions)
 
             tbLogger.step_val(0, float(loss), float(score), task_id, batch_size, 'val')
 
