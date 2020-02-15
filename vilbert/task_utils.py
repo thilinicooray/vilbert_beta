@@ -336,7 +336,7 @@ def compute_score_with_logits(logits, labels):
     scores = one_hots * labels
     return scores
 
-def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataloader, task_losses, results, predictions, others):
+def EvaluatingModel(args, task_cfg, device, task_id, batch, model, task_dataloader, task_losses, results, others, predictions ):
     batch = tuple(t.cuda(device=device, non_blocking=True) for t in batch)
     features, spatials, image_mask, question, target, input_mask, segment_ids, co_attention_mask, question_id, ann_id = batch
 
